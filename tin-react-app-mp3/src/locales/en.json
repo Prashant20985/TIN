@@ -1,0 +1,11 @@
+{
+    "main-page": {
+		"content": "Main Page"
+	},
+	"nav": {
+		"main-page": "Main page",
+		"customers": "Customers",
+		"cars": "Cars",
+		"rents": "Rents"
+	}
+}

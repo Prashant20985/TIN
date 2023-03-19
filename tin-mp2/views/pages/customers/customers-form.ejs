@@ -1,0 +1,113 @@
+<%- include('../../fragments/header.ejs') %>
+    <main>
+        <script type="application/javascript" src="/javascript/customerFormValidation.js"></script>
+        <h2>
+            <%= pageTitle%>
+        </h2>
+
+        <form class="form" method="post" action="<%=formAction%>" novalidate>
+
+            <input type="hidden" name="_id" value="<%= customer._Id %>">
+            <label for="name">Name:<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="name" id="name" placeholder="First Name" value="<%= customer.name %>"
+                class="<%= validationErrors.find(e => e.path.includes('name')) ? 'error-input' : '' %>"
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %>/>
+            <span id="errorName" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('name'))) { %>
+                    <%= validationErrors.find(e=> e.path.includes('name')).message %>
+                        <% } %>
+            </span>
+
+            <label for="lastName">Last Name:<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="lastName" id="lastName" placeholder="Last Name" value="<%= customer.lastName %>"
+                class="<%= validationErrors.find(e=>
+            e.path.includes('lastName')) ? 'error-input' : '' %>" <%=(formMode=='showDetails' ) ? 'disabled' : '' %> />
+            <span id="errorLastName" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('lastName'))) { %>
+                    <%= validationErrors.find(e=> e.path.includes('lastName')).message %>
+                        <% } %>
+            </span>
+
+            <label for="email">Enail:</label>
+            <input type="text" name="email" id="email" placeholder="example@domain.com"
+                value="<%= customer.email %>"
+                class="<%= validationErrors.find(e=>e.path.includes('email')) ? 'error-input' : '' %>"
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> />
+            <span id="errorEmail" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('email'))) { %>
+                    <%= validationErrors.find(e=> e.path.includes('email')).message %>
+                        <% } %>
+            </span>
+
+            <label for="phoneNumber">Phone Number:<abbr title="required" aria-label="required">*</abbr></label>
+            <input type="text" name="phoneNumber" id="phoneNumber" placeholder="Phone Number"
+                value="<%= customer.phoneNumber %>"
+                class="<%= validationErrors.find(e=>e.path.includes('phoneNumber')) ? 'error-input' : '' %>"
+                <%=(formMode=='showDetails' ) ? 'disabled' : '' %> />
+            <span id="errorPhoneNumber" class="errors-text">
+                <% if (validationErrors.find(e=> e.path.includes('phoneNumber'))) { %>
+                    <%= validationErrors.find(e=> e.path.includes('phoneNumber')).message %>
+                        <% } %>
+            </span>
+
+            <% if (formMode=='showDetails' ) { %>
+                <div>
+                    <a class="button edit" href="/customers/edit/<%= customer._Id %>">Edit</a>
+                </div>
+                <% } %>
+
+                    <div>
+                        <p id="errorsSummary" class="errors-text"></p>
+
+                        <% if (formMode !='showDetails' ) { %>
+                            <input class="button submit" type="submit" value="<%=btnLabel%>" />
+                            <a class="button cancel" href="/customers">Cancel</a>
+                            <% } 
+                            else { %>
+                                <a class="button cancel" href="/customers">Return</a>
+                            <% } %>
+                    </div>
+
+        </form>
+        </br>
+        <% if (formMode=='showDetails' || formMode=='edit' ) { %>
+            <h2>Customer Rental Details</h2>
+
+            <table class="list">
+                <thead>
+                    <tr>
+                        <th>Car</th>
+                        <th>Model</th>
+                        <th>Price</th>
+                        <th>Pickup Date</th>
+                        <th>Return Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% for (let c of customer.rents) { %>
+                        <tr>
+                            <td>
+                                <%= c.car.brand %>
+                            </td>
+                            <td>
+                                <%= c.car.model %>
+                            </td>
+                            <td>
+                                <%= c.price %>
+                            </td>
+                            <td>
+                                <%= c.pickupDate%>
+                            </td>
+                            <td>
+                                <%= c.returnDate%>
+                            </td>
+                        </tr>
+                        <% } %>
+                </tbody>
+            </table>
+            <% } %>
+
+    </main>
+
+    <%- include('../../fragments/footer.ejs') %>

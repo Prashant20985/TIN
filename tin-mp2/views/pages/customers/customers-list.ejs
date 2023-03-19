@@ -1,0 +1,41 @@
+<%- include('../../fragments/header.ejs') %>
+    <main>
+        <h3>Customers List</h3>
+        <br>
+        <table class="list">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Phone Number</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <% for (let customer of customers) { %>
+                    <tr>
+                        <td>
+                            <%= customer.name %>
+                        </td>
+                        <td>
+                            <%= customer.lastName %>
+                        </td>
+                        <td>
+                            <%= customer.email %>
+                        </td>
+                        <td>
+                            <%= customer.phoneNumber %>
+                        </td>
+                        <td>
+                            <a class="button view" href="/customers/details/<%=customer._Id%>">View</a>
+                            <a class="button edit" href="/customers/edit/<%=customer._Id%>">Edit</a>
+                            <a class="button del" href="/customers/delete/<%=customer._Id%>">Delete</a>
+                        </td>
+                    </tr>
+                    <% } %>
+        </table>
+        <a type="button" href="/customers/add" class="button add">Add Customer</a>
+    </main>
+    <%- include('../../fragments/footer.ejs') %>

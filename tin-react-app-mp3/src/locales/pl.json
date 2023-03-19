@@ -1,0 +1,11 @@
+{
+    "main-page": {
+		"content": "Strona główna"
+	},
+	"nav": {
+		"main-page": "Strona główna",
+		"customers": "klient",
+		"cars": "Samochód",
+		"rents": "Wynajem"
+	}
+}

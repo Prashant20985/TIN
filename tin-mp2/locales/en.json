@@ -1,0 +1,21 @@
+{
+	"main-page": {
+		"content": "Main Page",
+		"nav": {
+			"logout": "main-page.nav.logout"
+		}
+	},
+	"nav": {
+		"main-page": "Main page",
+		"customers": "Customers",
+		"cars": "Cars",
+		"rents": "Rents"
+	},
+	"auth": {
+		"login": "auth.login",
+		"form": {
+			"email": "auth.form.email",
+			"password": "auth.form.password"
+		}
+	}
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="../../public/Images/disney-and-pixar-cars-logo-png-transparent.png">
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+
+<body>
+    <div class="navbar">
+        <div class="header">
+            <a href="/" class="<%= navLocation == 'main' ? 'active' : ''%> pagenav">
+                <%= __('nav.main-page') %>
+            </a>
+        </div>
+        <div class="navitems">
+            <% if(loggedUser) { %>
+                <a class="<%= navLocation == 'cars' ? 'active' : ''%> pagenav" href="/cars">
+                    <%= __('nav.cars') %>
+                </a>
+                <a class="<%= navLocation == 'customers' ? 'active' : ''%> pagenav" href="/customers">
+                    <%= __('nav.customers')%>
+                </a>
+                <a class="<%= navLocation == 'rent' ? 'active' : ''%> pagenav" href="/rent">
+                    <%= __('nav.rents') %>
+                </a>
+                <% } %>
+        </div>
+        <div class="langButtons">
+            <a href="/changeLang/pl" class="<%= lang == 'pl' ? 'active' : '' %> lang">PL</a> |
+            <a href="/changeLang/en" class="<%= lang == 'en' ? 'active' : '' %> lang">EN</a>
+        </div>
+    </div>
+    <main>
+        <header>
+            <h1>Car Service</h1>
+        </header>
+
+        <% if(!loggedUser) { %>
+            <div id="login">
+                <h2>
+                    Login
+                </h2>
+                <div class="form">
+                    <form action="/login" method="post" novalidate>
+                        <label for="loginEmail">
+                            Email
+                        </label>
+                        <input id="loginEmail" type="text" name="email" placeholder="Email" />
+    
+                        <label for="loginPassword">
+                            Password:
+                        </label>
+                        <input type="password" name="password" id="loginPassword" placeholder="Password" />
+    
+                        <input class="button submit" type="submit" value="Sign in" />
+                        <span id="loginErrors">
+                            <%= loginError ? loginError : '' %>
+                        </span>
+                    </form>
+                </div>
+            </div>
+            <% }else { %>
+                <div>
+                    <span>You are logged in as: <%=loggedUser.name + " " + loggedUser.lastName + " " %></span>
+                <a href="/logout">
+                    Logout
+                </a>
+                </div>
+                <% } %>
